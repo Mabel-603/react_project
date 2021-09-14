@@ -1,6 +1,6 @@
-import {INCREMENT,DECREMENT} from  './action_types'
+import {INCREMENT,DECREMENT} from  '../action_types'
 let initialState = 0;
-export default function (preState=initialState,action){
+export default function operaCount(preState=initialState,action){
   console.log('reducer 调用了-------',action);
   let newState;
   let {type,data} = action;
