@@ -16,7 +16,7 @@ export default class Login extends Component{
   };
   this.pwdValidator=(rule, value)=>{
     if(!value){
-      return Promise.reject(new Error('密码必须输入'))
+      return Promise.reject(new Error('密码必须输入!'))
     }else if(value.length < 4){
       return Promise.reject(new Error('密码必须大于等于4位'))
     }else if(value.length > 12){
@@ -58,8 +58,8 @@ export default class Login extends Component{
         <Input prefix={<UserOutlined style={{color:'rgba(0,0,0,.5)'}}/>}/> 
       </Form.Item>
 
-      <Form.Item  label="密码" name="password" rules={[
-        {validator:this.pwdValidator},{required: true}
+    <Form.Item  label={'密'+'\xa0\xa0\xa0\xa0'+'码'} name="password" rules={[
+        {validator:this.pwdValidator,required:true}
     ]}>
         <Input.Password prefix={<LockOutlined style={{color:'rgba(0,0,0,.5)'}}/>}/>
       </Form.Item>
