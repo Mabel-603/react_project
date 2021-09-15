@@ -3,17 +3,23 @@ import { Form, Input, Button, Checkbox,} from 'antd'
 import {UserOutlined,LockOutlined} from '@ant-design/icons';
 import "./css/login.less"
 import logo from './imgs/logo.jpg'
-export default class Login extends Component{
-
+import { connect } from 'react-redux';
+import {creteDemo1Action,creteDemo2Action} from '../../redux/action_creators/test-action'
+class Login extends Component{
+componentDidMount(){
+  console.log(this.props);
+}
     render(){
     const onFinish = (values) => {
     console.log('Success:', values);
-    alert('向服务器发送登录请求')
+    // alert('向服务器发送登录请求')
+    this.props.demo2('0915')
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+  //密码验证器
   this.pwdValidator=(rule, value)=>{
     if(!value){
       return Promise.reject(new Error('密码必须输入!'))
@@ -31,7 +37,7 @@ export default class Login extends Component{
       <div className="login">
         <header>
            <img src={logo} alt="logo" />
-           <h1>商品管理系统</h1>
+           <h1>商品管理系统{this.props.test}</h1>
         </header>
         <section>
           <h1>用户登录</h1>
@@ -80,3 +86,11 @@ export default class Login extends Component{
       )
     }
 }
+
+export default connect(
+state=>({test:state.test}),
+{
+  demo1:creteDemo1Action,
+  demo2:creteDemo2Action
+}
+)(Login)
