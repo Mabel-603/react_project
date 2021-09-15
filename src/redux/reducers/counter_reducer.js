@@ -1,17 +1,18 @@
-import {INCREMENT,DECREMENT} from  '../action_types'
-let initialState = 0;
-export default function operaCount(preState=initialState,action){
-  console.log('reducer 调用了-------',action);
+
+import {INCREMENT,DECREMENT} from '../action_types.js'
+export default function Reducer(previousState=0,action){
+  console.log('----reducer调用了----',action);
   let newState;
   let {type,data} = action;
 switch (type) {
-    case INCREMENT:
-    newState = preState + data;
+  case INCREMENT:
+    newState = previousState + data;
     console.log(newState);
-    return newState; 
-    case DECREMENT:
-    newState = preState - data;
     return newState;
-    default:return preState;
+  case DECREMENT:
+    newState = previousState - data;
+    console.log(newState);
+    return newState;
+  default:return previousState;
 }
 }

@@ -1,54 +1,49 @@
 import React,{Component} from 'react'
 
-export default class Counter extends Component{
-  
-  componentDidMount(){
-    console.log(this.props);
-  }
-   
-  //加法
-increment = ()=>{
-  let {value} = this.refs.selectNumber;
-  this.props.increment(value*1)
-}
-//减法
-decrement = ()=>{
-  let {value} = this.refs.selectNumber;
-  this.props.decrement(value*1)
-}
-//奇数加
-incrementIfOdd = ()=>{
-  let {value} = this.refs.selectNumber;
- let {count} = this.props;
-  if(count%2 === 1){
-    this.props.increment(value*1)
-  }
-}
-//异步加
-incrementAsync = ()=>{
-  let {value} = this.refs.selectNumber;
-  this.props.incrementAsync(value*1,1000)
-  // setTimeout(() => {
-  //   this.props.increment(value*1)
-  // }, 1000);
 
+export default class App extends Component{
+componentDidMount(){
+ console.log(this.props.count);
+}
+
+ increment =()=>{//为什么这里前面写function不对---->因为后面才是在定义箭头函数
+  let {value} = this.refs.selectNumber;
+  this.props.increment(value*1);
+}
+decrement =()=>{
+  let {value} = this.refs.selectNumber;
+  this.props.decrement(value*1);
+}
+IncrementIfOdd=()=>{
+  let {count} = this.props;
+  if(count%2 === 1){
+    let {value} = this.refs.selectNumber;
+    this.props.increment(value*1);
+  }
+}
+IncrementAsync =()=>{
+  let {value} = this.refs.selectNumber;
+  this.props.incrementAsync(value*1);
+// setTimeout(() => {
+//   let {value} = this.refs.selectNumber;
+//   this.props.increment(value*1);
+// }, 1000);
 }
     render(){
-    //  let {count} = this.props;
+      let {count} = this.props;
       return(
       <div>
-        <h3>当前计数为{this.props.count},当前页面有{this.props.person.length}个人</h3>
+        <h1>当前计数为{count}</h1>
         <select ref="selectNumber">
-         <option value="1">1</option>
-         <option value="2">2</option>
-         <option value="3">3</option>
+         <option>1</option>
+         <option>2</option>
+         <option>3</option>
         </select>&nbsp;
-        <button onClick={this.increment}>+</button>&nbsp;
-        <button onClick={this.decrement}>-</button>&nbsp;
-        <button onClick={this.incrementIfOdd}>increment if odd</button>&nbsp;
-        <button onClick={this.incrementAsync}>increment async</button>
-
+        <button onClick ={this.increment} >+</button>&nbsp;
+        <button onClick ={this.decrement}>-</button>&nbsp;
+        <button onClick ={this.IncrementIfOdd}>increment if odd</button>&nbsp;
+        <button onClick ={this.IncrementAsync}>increment async</button>
       </div>
-      ) 
+      )
     }
 }
