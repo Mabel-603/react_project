@@ -4,6 +4,7 @@ import {UserOutlined,LockOutlined} from '@ant-design/icons';
 import "./css/login.less"
 import logo from './imgs/logo.jpg'
 import { connect } from 'react-redux';
+import axios from 'axios'
 import {creteDemo1Action,creteDemo2Action} from '../../redux/action_creators/test-action'
 class Login extends Component{
 componentDidMount(){
@@ -12,8 +13,9 @@ componentDidMount(){
     render(){
     const onFinish = (values) => {
     console.log('Success:', values);
+    //values的值是:{username:XXX,password:yyy}
     // alert('向服务器发送登录请求')
-    this.props.demo2('0915')
+    axios()
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -37,7 +39,7 @@ componentDidMount(){
       <div className="login">
         <header>
            <img src={logo} alt="logo" />
-           <h1>商品管理系统{this.props.test}</h1>
+           <h1>商品管理系统</h1>
         </header>
         <section>
           <h1>用户登录</h1>
