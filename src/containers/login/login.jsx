@@ -9,7 +9,10 @@ import logo from './imgs/logo.jpg'
 import "./css/login.less"
 
 const {Item} = Form;
-
+@connect(
+  state=>({isLogin:state.userInfo.isLogin}),
+  {saveUserInfo:creteSaveUserInfoAction}
+  )
 class Login extends Component{
 componentDidMount(){
   console.log(this.props);
@@ -27,9 +30,7 @@ componentDidMount(){
    this.props.saveUserInfo(data)
     //2.跳转admin页面
    this.props.history.replace('/admin')
-  }else{
-    message.warning(msg,1)//表示提示1s后消失
-  }
+  }else message.warning(msg,1)//表示提示1s后消失
 };
 
  onFinishFailed = (errorInfo) => {
@@ -52,9 +53,8 @@ pwdValidator=(rule, value)=>{
   }
     render(){
      const {isLogin} = this.props;
-     if(isLogin){
-       return <Redirect to='/admin'/>
-     }
+     if(isLogin)  return <Redirect to='/admin'/>
+     
       return(
       <div className="login">
         <header>
@@ -71,12 +71,6 @@ pwdValidator=(rule, value)=>{
       onFinish={this.onFinish}
       onFinishFailed={this.onFinishFailed}
       autoComplete="off">
-          {/* 用户名/密码的的合法性要求
-         1). 必须输入
-         2). 必须大于等于4位
-         3). 必须小于等于12位
-         4). 必须是字母、数字或下划线组成
-        */}
       <Item label="用户名" name="username" rules={[{required: true,message: '用户名必须输入!'},
       {max:12,message:'用户名必须小于等于12位'},
       {min:4,message:'用户名必须大于等于4位'},
@@ -108,10 +102,4 @@ pwdValidator=(rule, value)=>{
       )
     }
 }
-
-export default connect(
-state=>({isLogin:state.userInfo.isLogin}),
-{
-  saveUserInfo:creteSaveUserInfoAction
-}
-)(Login)
+export default Login
